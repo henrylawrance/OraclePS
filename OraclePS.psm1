@@ -1,4 +1,4 @@
-# Taken from http://overpoweredshell.com/Working-with-Plaster/
+Add-type -Path "C:\oracle\instantclient_10_2\odp.net\managed\common\Oracle.ManagedDataAccess.dll"
 
 $functionFolders = @('functions', 'internal', 'classes')
 ForEach ($folder in $functionFolders)
@@ -11,7 +11,7 @@ ForEach ($folder in $functionFolders)
         ForEach ($function in $functions)
         {
             Write-Verbose -Message "  Importing $($function.BaseName)"
-            . $function.providerpath
+            . $function.FullName
         }
     }
 }
