@@ -5,14 +5,20 @@ function Invoke-Oracmd {
         [parameter()][String] $Port = '8002',
         [parameter()][String] $Protocol = 'TCP',
         [parameter(Mandatory)][String] $ServiceName,
-        [parameter(Mandatory)][pscredential] $Cred,
+        [parameter()][pscredential] $Cred,
+        [parameter()][String] $Username,
+        [parameter()][String] $Password,
         [parameter()][switch] $OutputDataSet
-
     )
     begin {
         try {
-            $Username = $Cred.UserName
-            $Password = [System.Runtime.InteropServices.Marshal]::PtrToStringAuto([System.Runtime.InteropServices.Marshal]::SecureStringToBSTR($Cred.Password))
+            if ($cred) {
+                $Username = $Cred.UserName
+                $Password = [System.Runtime.InteropServices.Marshal]::PtrToStringAuto([System.Runtime.InteropServices.Marshal]::SecureStringToBSTR($Cred.Password))
+            } elseif (!$Username -and !$Password) {
+                Write-Error "Please provide credentials with -Cred or -Username & -Password"
+                throw
+            }
         }
         catch {
             Write-Error "Credential Error"

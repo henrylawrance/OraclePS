@@ -1,4 +1,6 @@
-Add-type -Path "C:\oracle\instantclient_10_2\odp.net\managed\common\Oracle.ManagedDataAccess.dll"
+
+## CHANGE THIS PATH IF YOU INSTALL THE DRIVER ELSEWHERE ##
+Add-type -Path ".\files\Oracle.ManagedDataAccess.dll"
 
 $functionFolders = @('functions', 'internal', 'classes')
 ForEach ($folder in $functionFolders)

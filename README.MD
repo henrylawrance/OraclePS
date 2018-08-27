@@ -6,23 +6,21 @@ Connects PowerShell to Oracle using ODP.NET Managed Driver
 
 Authored by Henry Lawrance
 
-## Installing
+## Installing ODP.NET Managed Driver
+
+#### Not Required - If you install the driver to a different location, change the path in OraclePS.psm1
 
 Extract /files/ODP.NET_Managed_ODAC12cR4.7z
 
 Run cmd as administrator, navigate to C:\ODP.NET_Managed_ODAC12cR4, and run:
 `install_odpm.bat C:\oracle\instantclient_10_2 both`
 
-### Inspecting the module
+### Import the module
 
-Best practice is that you inspect modules prior to installing them. You can do this by saving the module to a local path:
+Import-Module ./OraclePS.psm1
 
-``` PowerShell
-PS> Save-Module -Name OraclePS -Path <path>
-```
+### Using the module
 
-### Installing the module
+`PS> Invoke-Oracmd -Query "select * from spriden where spriden_id = 'X10000000'" -ServerAddress xxx.xxx.xxx.xx -ServiceName 'PROD.domain.com' -Username 'awesomeadmin' -Password 'supersecret'`
 
-Install-Module ./OraclePS.psm1
-
-
+`PS> Invoke-Oracmd -Query "select * from spriden where spriden_id = 'X10000000'" -ServerAddress xxx.xxx.xxx.xx -ServiceName 'PROD.domain.com' -Cred (Get-Credential)'`
